@@ -4,6 +4,7 @@ import { AppContext } from '../context/AppContext';
 
 const ExpenseItem = (props) => {
     const { dispatch } = useContext(AppContext);
+    const { currency } = useContext(AppContext);
 
     const handleDeleteExpense = () => {
         dispatch({
@@ -25,12 +26,43 @@ const ExpenseItem = (props) => {
 
     }
 
+    const decreaseAllocation = (name) => {
+        const expense = {
+            name: name,
+            cost: -10,
+        };
+
+        dispatch({
+            type: 'ADD_EXPENSE',
+            payload: expense
+        });
+
+    }
+
+    // Inline styles for the + and - buttons
+    const addButtonStyle = {
+        backgroundColor: '#008000',  // Green background color
+        color: '#FFF',               // White text color
+        borderRadius: '50%',         // Round shape
+        padding: '5px 10px',         // Padding for better appearance
+        cursor: 'pointer',           // Cursor style
+    };
+
+    const minusButtonStyle = {
+        backgroundColor: '#FF0000',  // Red background color
+        color: '#FFF',               // White text color
+        borderRadius: '50%',         // Round shape
+        padding: '5px 10px',         // Padding for better appearance
+        cursor: 'pointer',           // Cursor style
+    };
+
     return (
         <tr>
-        <td>{props.name}</td>
-        <td>£{props.cost}</td>
-        <td><button onClick={event=> increaseAllocation(props.name)}>+</button></td>
-        <td><TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete></td>
+            <td>{props.name}</td>
+            <td>{currency}{props.cost}</td>
+            <td><button style={addButtonStyle} onClick={() => increaseAllocation(props.name)}>+</button></td>
+            <td><button style={minusButtonStyle} onClick={() => decreaseAllocation(props.name)}>-</button></td>
+            <td><TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete></td>
         </tr>
     );
 };

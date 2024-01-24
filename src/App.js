@@ -10,6 +10,7 @@ import RemainingBudget from './components/Remaining';
 import CurrencySelect from './components/CurrencySelect';
 
 const App = () => {
+   
     return (
         <AppProvider>
             <div className='container'>
