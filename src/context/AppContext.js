@@ -111,6 +111,7 @@ export const AppProvider = (props) => {
             value={{
                 expenses: state.expenses,
                 budget: state.budget,
+                
                 remaining: remaining,
                 dispatch,
                 currency: state.currency
